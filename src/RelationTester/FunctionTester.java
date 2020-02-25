@@ -1,5 +1,10 @@
 package RelationTester;
 import java.lang.Math;
+import java.lang.reflect.InvocationTargetException;
+
+import org.codehaus.commons.compiler.CompileException;
+import org.codehaus.janino.*;
+import org.w3c.dom.Document;
 public class FunctionTester {
 	
 	enum Function{
@@ -66,7 +71,9 @@ public class FunctionTester {
 	
 	private void metaTest (int x, Comparator c, Function f) {
 		double Ain, Bin, Aout = 0, Bout = 0;
+		
 		Ain = Math.toRadians(x);
+		
 		Bin = Ain + (2*Math.PI);
 		
 		
@@ -136,7 +143,29 @@ public class FunctionTester {
 		return Math.tan(x);
 	}
 	
-	public static void main(String[] args) {
-		FunctionTester fe = new FunctionTester(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Function.Cos, Comparator.Equal);
+	public static void main(String[] args) throws CompileException, InvocationTargetException {
+		/*try {
+			XMLinterface xmlInterface = new XMLinterface();
+			Document doc = null;
+			xmlInterface.readXML("C:/Users/areid/OneDrive/Documents/COMPSCI/YEAR 3/MT/Java project/src/RelationTester/Students.xml");
+			xmlInterface.outputXML();
+		} catch (Exception e) {
+			e.printStackTrace();
+	    }
+		*/
+		String relationExpression = "Math.sin(x)";
+		ExpressionEvaluator ee = new ExpressionEvaluator();
+		ee.setParameters(new String[]{"x"}, new Class[]{Double.class});	
+		ee.setExpressionType(Double.class);
+		ee.cook(relationExpression);
+		
+		Double out = (Double) ee.evaluate(new Object[] { Math.toRadians(30) });
+		System.out.println(out.toString());
+		ee.cook("Math.sin(x+(2*Math.PI))");
+		
+		System.out.println(ee.evaluate(new Object[] { Math.toRadians(30) }).toString());
+		out = (Double) ee.evaluate(new Object[] { Math.toRadians(30) });
+		System.out.println(out.toString());
+		//FunctionTester fe = new FunctionTester(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Function.Cos, Comparator.Equal);
 	}
 }
