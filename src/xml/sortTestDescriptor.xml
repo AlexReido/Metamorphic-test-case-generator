@@ -1,0 +1,50 @@
+<?xml version = "1.0"?>
+<TestDescriptor>
+	<Execution>programsUnderTest/csvSorter.jar</Execution>
+
+	<Input Type="csv" Name="csvIn"></Input>
+		
+	<Output Type="csv" Name="csvOut"></Output>
+
+	<Source_Test Input="programsUnderTest/input.csv" Output="programsUnderTest/output.csv"></Source_Test>
+
+	<Branch Name = "permute">
+			<In repition = "100"><Operation>permute</Operation><Operation>repeat</Operation></In>
+			<Comparison>equal</Comparison>
+	</Branch>
+	<Branch Name = "negate_and_Rearrange">
+		<In repition = "100" expr = "-x"><Operation>permute</Operation><Operation>repeat</Operation><Operation>expr</Operation></In>
+           <Out expr = "-x"><Operation>reverse</Operation><Operation>expr</Operation></Out>
+		<Comparison>equal</Comparison>
+    </Branch>
+	<Branch Name = "constant transform">
+		<In repition = "100" expr = "(x+678)"><Operation>permute</Operation><Operation>repeat</Operation><Operation>expr</Operation></In>
+		<Out expr = "(x+678)"><Operation>expr</Operation></Out>
+		<Comparison>equal</Comparison>
+	</Branch>
+	<Branch Name = "constant transform">
+		<In expr = "(x+7)*7" repition = "100"><Operation>permute</Operation><Operation>repeat</Operation><Operation>expr</Operation></In>
+		<Out expr = "(x+7)*7"><Operation>expr</Operation></Out>
+		<Comparison>equal</Comparison>
+	</Branch>
+	<Branch Name = "constant transform">
+		<In repition = "100" expr = "(x*3)+6"><Operation>permute</Operation><Operation>repeat</Operation><Operation>expr</Operation></In>
+		<Out expr = "(x*3)+6"><Operation>expr</Operation></Out>
+		<Comparison>equal</Comparison>
+	</Branch>
+	<Branch Name = "constant transform">
+		<In repition = "100" expr = "(x+17)*6"><Operation>permute</Operation><Operation>repeat</Operation><Operation>expr</Operation></In>
+		<Out expr = "(x+17)*6"><Operation>expr</Operation></Out>
+		<Comparison>equal</Comparison>
+	</Branch>
+	<Branch Name = "add min value">
+		<In repition = "100"><Operation>permute</Operation><Operation>repeat</Operation><Operation>dupMin</Operation></In>
+		<Out ><Operation>dupMin</Operation></Out>
+		<Comparison>equal</Comparison>
+	</Branch>
+	<Branch Name = "add max value">
+		<In repition = "100"><Operation>permute</Operation><Operation>repeat</Operation><Operation>dupMax</Operation></In>
+		<Out ><Operation>dupMax</Operation></Out>
+		<Comparison>equal</Comparison>
+	</Branch>
+</TestDescriptor>

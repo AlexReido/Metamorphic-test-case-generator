@@ -1,0 +1,19 @@
+<?xml version = "1.0"?>
+<TestDescriptor>
+	<Execution>programsUnderTest/shortestPath.jar</Execution>
+
+	<Input Type="graph" Name="graphIn"></Input>
+		
+	<Output Type="int" Name="intOut"></Output>
+
+	<Source_Test Input="ObjectFiles/graph.ser" Output="22"></Source_Test>
+
+	<Branch Name = "reversePath">
+		<In><Operation>reverse</Operation></In>
+    </Branch>
+    <Branch Name = "Fuzz Testing">
+		<In repition = "50"><Operation>repeat</Operation><Operation>random</Operation><Operation>reverse</Operation></In>
+     </Branch> 
+     
+		
+</TestDescriptor>

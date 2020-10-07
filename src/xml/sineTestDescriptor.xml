@@ -1,0 +1,23 @@
+<?xml version = "1.0"?>
+<TestDescriptor>
+	<Execution>programsUnderTest/sine.exe</Execution>
+
+	<Input Type="num" Name="numIn"></Input>
+		
+	<Output Type="num" Name="numOut"></Output>
+
+	<Source_Test Input="1" Output="0.841471"></Source_Test>
+
+	<Branch Name = "add_twoPi">
+		<In expr = "x+(2*Math.PI)"><Operation>expr</Operation></In>
+     </Branch>
+	<Branch Name = "negative_of_Sine_of_add_Pi">
+		<In expr = "-1*(x + Math.PI)"><Operation>expr</Operation></In>
+     </Branch>
+	<Branch Name = "negative_of_Sine_of_negtive_Pi">
+		<In expr = "-x"><Operation>expr</Operation></In>
+		<Out expr = "-x"><Operation>expr</Operation></Out>
+       </Branch>
+		
+	
+</TestDescriptor>
